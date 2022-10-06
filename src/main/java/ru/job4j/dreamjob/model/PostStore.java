@@ -1,7 +1,7 @@
 package ru.job4j.dreamjob.model;
 
+import java.time.LocalDateTime;
 import java.util.Collection;
-import java.util.Date;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -11,7 +11,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * Когда приложение запустится, то в хранилище будут три объекта Post.
  *
  * @author Alex_life
- * @version 1.0
+ * @version 3.0
  * @since 06.10.2022
  */
 public class PostStore {
@@ -21,9 +21,9 @@ public class PostStore {
     private final Map<Integer, Post> posts = new ConcurrentHashMap<>();
 
     private PostStore() {
-        posts.put(1, new Post(1, "Junior Java Job", "jjj", new Date()));
-        posts.put(2, new Post(2, "Middle Java Job", "mjj", new Date()));
-        posts.put(3, new Post(3, "Senior Java Job", "sjj", new Date()));
+        posts.put(1, new Post(1, "Junior Java Job", "jjj", LocalDateTime.now()));
+        posts.put(2, new Post(2, "Middle Java Job", "mjj", LocalDateTime.now()));
+        posts.put(3, new Post(3, "Senior Java Job", "sjj", LocalDateTime.now()));
     }
 
     public static PostStore instOf() {
