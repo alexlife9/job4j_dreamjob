@@ -25,7 +25,7 @@ import java.util.Objects;
  *
  *
  * @author Alex_life
- * @version 2.0
+ * @version 3.0
  * @since 06.10.2022
  */
 public class Post {
@@ -34,7 +34,9 @@ public class Post {
     private String description;
     private LocalDateTime created;
 
-    public Post() {
+    public Post(int id, String name) {
+        this.id = id;
+        this.name = name;
     }
 
     public Post(int id, String name, String description, LocalDateTime created) {

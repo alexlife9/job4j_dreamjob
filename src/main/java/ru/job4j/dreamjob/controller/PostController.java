@@ -3,9 +3,12 @@ package ru.job4j.dreamjob.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import ru.job4j.dreamjob.model.Post;
 import ru.job4j.dreamjob.model.PostStore;
 
+import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
 
 /**
@@ -16,7 +19,7 @@ import java.time.LocalDateTime;
  * Thymeleaf генерирует HTML и возвращает ее клиенту.
  *
  * @author Alex_life
- * @version 1.0
+ * @version 3.0
  * @since 06.10.2022
  */
 @Controller
@@ -35,5 +38,11 @@ public class PostController {
         model.addAttribute("posts",
                 new Post(0, "Заполните поле", "Заполните поле", LocalDateTime.now()));
         return "addPost";
+    }
+
+    @PostMapping("/createPost")
+    public String createPost(@ModelAttribute Post post) {
+        store.add(post);
+        return "redirect:/posts";
     }
 }
