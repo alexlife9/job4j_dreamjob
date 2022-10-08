@@ -1,9 +1,12 @@
 package ru.job4j.dreamjob.model;
 
 import java.time.LocalDateTime;
+import java.time.Year;
+import java.time.format.DateTimeFormatter;
 import java.util.Collection;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Thymeleaf, Циклы
@@ -17,6 +20,8 @@ import java.util.concurrent.ConcurrentHashMap;
 public class PostStore {
 
     private static final PostStore INST = new PostStore();
+
+    private final AtomicInteger idS = new AtomicInteger(1); /* начальный серийный айди = 1 */
 
     private final Map<Integer, Post> posts = new ConcurrentHashMap<>();
 
@@ -34,6 +39,8 @@ public class PostStore {
     }
 
     public void add(Post post) {
+        post.setId(idS.getAndIncrement()); /* установили автоматический счетчик всех новых id */
+        post.setCreated(LocalDateTime.now()); /* назначаем дату создания */
         posts.put(post.getId(), post);
     }
 }
