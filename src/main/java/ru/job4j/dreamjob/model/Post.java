@@ -25,14 +25,17 @@ import java.util.Objects;
  *
  *
  * @author Alex_life
- * @version 3.0
- * @since 06.10.2022
+ * @version 4.0
+ * @since 08.10.2022
  */
 public class Post {
     private int id;
     private String name;
     private String description;
     private LocalDateTime created;
+
+    public Post() {
+    }
 
     public Post(int id, String name) {
         this.id = id;
