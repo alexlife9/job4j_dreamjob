@@ -1,5 +1,6 @@
 package ru.job4j.dreamjob.persistence;
 
+import org.apache.http.annotation.ThreadSafe;
 import org.springframework.stereotype.Repository;
 import ru.job4j.dreamjob.model.Candidate;
 
@@ -13,9 +14,10 @@ import java.util.concurrent.atomic.AtomicInteger;
  * Хранилище добавленных кандидатов
  *
  * @author Alex_life
- * @version 2.0
- * @since 08.10.2022
+ * @version 3.0
+ * @since 09.10.2022
  */
+@ThreadSafe
 @Repository
 public class CandidateStore {
     private static final CandidateStore CST = new CandidateStore();

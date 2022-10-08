@@ -1,5 +1,6 @@
 package ru.job4j.dreamjob.controller;
 
+import org.apache.http.annotation.ThreadSafe;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,9 +20,10 @@ import java.time.LocalDateTime;
  * Thymeleaf генерирует HTML и возвращает ее клиенту.
  *
  * @author Alex_life
- * @version 4.0
- * @since 08.10.2022
+ * @version 5.0
+ * @since 09.10.2022
  */
+@ThreadSafe
 @Controller
 public class PostController {
     private final PostService postService = PostService.instOf();

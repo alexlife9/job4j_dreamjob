@@ -1,5 +1,6 @@
 package ru.job4j.dreamjob.controller;
 
+import org.apache.http.annotation.ThreadSafe;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,9 +18,10 @@ import java.time.LocalDateTime;
  * После запуска программы открываем браузер по ссылке http:\\localhost:8080/candidates
  *
  * @author Alex_life
- * @version 2.0
- * @since 08.10.2022
+ * @version 3.0
+ * @since 09.10.2022
  */
+@ThreadSafe
 @Controller
 public class CandidateController {
     private final CandidateService candidateService = CandidateService.instOf();

@@ -1,5 +1,6 @@
 package ru.job4j.dreamjob.controller;
 
+import org.apache.http.annotation.ThreadSafe;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -21,9 +22,10 @@ import org.springframework.web.bind.annotation.GetMapping;
  * Файл index.html находится по пути: src/main/resources/templates/index.html
  *
  * @author Alex_life
- * @version 3.0
- * @since 08.10.2022
+ * @version 4.0
+ * @since 09.10.2022
  */
+@ThreadSafe
 @Controller
 public class IndexControl {
 

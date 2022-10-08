@@ -1,5 +1,6 @@
 package ru.job4j.dreamjob.service;
 
+import org.apache.http.annotation.ThreadSafe;
 import org.springframework.stereotype.Service;
 import ru.job4j.dreamjob.model.Post;
 import ru.job4j.dreamjob.persistence.PostStore;
@@ -45,9 +46,10 @@ import java.util.Collection;
  * и делаете сквозные вызовы классов персистенции.
  *
  * @author Alex_life
- * @version 1.0
- * @since 08.10.2022
+ * @version 2.0
+ * @since 09.10.2022
  */
+@ThreadSafe
 @Service
 public class PostService {
     private static final PostService INST = new PostService();

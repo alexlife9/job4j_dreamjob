@@ -1,5 +1,6 @@
 package ru.job4j.dreamjob.persistence;
 
+import org.apache.http.annotation.ThreadSafe;
 import org.springframework.stereotype.Repository;
 import ru.job4j.dreamjob.model.Post;
 
@@ -15,9 +16,10 @@ import java.util.concurrent.atomic.AtomicInteger;
  * Хранит добавленные из браузера вакансии
  *
  * @author Alex_life
- * @version 6.0
- * @since 08.10.2022
+ * @version 7.0
+ * @since 09.10.2022
  */
+@ThreadSafe
 @Repository
 public class PostStore {
 
