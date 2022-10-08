@@ -1,4 +1,7 @@
-package ru.job4j.dreamjob.model;
+package ru.job4j.dreamjob.persistence;
+
+import org.springframework.stereotype.Repository;
+import ru.job4j.dreamjob.model.Candidate;
 
 import java.time.LocalDateTime;
 import java.util.Collection;
@@ -13,6 +16,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @version 2.0
  * @since 08.10.2022
  */
+@Repository
 public class CandidateStore {
     private static final CandidateStore CST = new CandidateStore();
 
