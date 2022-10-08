@@ -1,21 +1,19 @@
 package ru.job4j.dreamjob.model;
 
 import java.time.LocalDateTime;
-import java.time.Year;
-import java.time.format.DateTimeFormatter;
 import java.util.Collection;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- * Thymeleaf, Циклы
+ * Хранилище вакансий
  *
- * Хранилище будет хранить добавленные из браузера вакансии
+ * Хранит добавленные из браузера вакансии
  *
  * @author Alex_life
- * @version 4.0
- * @since 06.10.2022
+ * @version 5.0
+ * @since 08.10.2022
  */
 public class PostStore {
 
@@ -43,4 +41,13 @@ public class PostStore {
         post.setCreated(LocalDateTime.now()); /* назначаем дату создания */
         posts.put(post.getId(), post);
     }
+
+    public Post findById(int id) {
+        return posts.get(id);
+    }
+
+    public void update(Post post) {
+        posts.replace(post.getId(), post);
+    }
+
 }

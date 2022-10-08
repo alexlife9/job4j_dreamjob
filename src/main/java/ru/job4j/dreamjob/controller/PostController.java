@@ -4,23 +4,23 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import ru.job4j.dreamjob.model.Post;
 import ru.job4j.dreamjob.model.PostStore;
 
-import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
 
 /**
- * Thymeleaf, Циклы
+ * Контроллер для вакансий
  *
- * Метод posts принимает объект Model. Он используется Thymeleaf для поиска объектов, которые нужны отобразить на Виде.
+ * Метод posts принимает объект Model. Он используется Thymeleaf для поиска объектов, которые нужны отобразить на View.
  * Контроллер заполняет Model и передает два объекта в Thymeleaf – Model и View(posts.html).
  * Thymeleaf генерирует HTML и возвращает ее клиенту.
  *
  * @author Alex_life
- * @version 3.0
- * @since 06.10.2022
+ * @version 4.0
+ * @since 08.10.2022
  */
 @Controller
 public class PostController {
@@ -43,6 +43,18 @@ public class PostController {
     @PostMapping("/createPost")
     public String createPost(@ModelAttribute Post post) {
         store.add(post);
+        return "redirect:/posts";
+    }
+
+    @GetMapping("/formUpdatePost/{postId}")
+    public String formUpdatePost(Model model, @PathVariable("postId") int id) {
+        model.addAttribute("post", store.findById(id));
+        return "updatePost";
+    }
+
+    @PostMapping("/updatePost")
+    public String updatePost(@ModelAttribute Post post) {
+        store.update(post);
         return "redirect:/posts";
     }
 }
