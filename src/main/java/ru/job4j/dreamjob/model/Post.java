@@ -2,10 +2,9 @@ package ru.job4j.dreamjob.model;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
-import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- * Thymeleaf, Циклы
+ * Модель вакансии
  *
  * Затронем идею шаблона проектирования MVC (Model, View, Control).
  * Весь пользовательский интерфейс можно разбить на отдельные экраны или виды.
@@ -36,11 +35,6 @@ public class Post {
     private LocalDateTime created;
 
     public Post() {
-    }
-
-    public Post(int id, String name) {
-        this.id = id;
-        this.name = name;
     }
 
     public Post(int id, String name, String description, LocalDateTime created) {

@@ -7,7 +7,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- * Хранилище вакансий
+ * Хранилище добавленных вакансий
  *
  * Хранит добавленные из браузера вакансии
  *
@@ -21,11 +21,9 @@ public class PostStore {
 
     private final AtomicInteger idS = new AtomicInteger(1); /* начальный серийный айди = 1 */
 
-    private final Map<Integer, Post> posts = new ConcurrentHashMap<>();
+    private final Map<Integer, Post> postStore = new ConcurrentHashMap<>();
 
     private PostStore() {
-        /* удалил вручную добавленные вакансии */
-
     }
 
     public static PostStore instOf() {
@@ -33,21 +31,20 @@ public class PostStore {
     }
 
     public Collection<Post> findAll() {
-        return posts.values();
+        return postStore.values();
     }
 
     public void add(Post post) {
         post.setId(idS.getAndIncrement()); /* установили автоматический счетчик всех новых id */
         post.setCreated(LocalDateTime.now()); /* назначаем дату создания */
-        posts.put(post.getId(), post);
+        postStore.put(post.getId(), post);
     }
 
     public Post findById(int id) {
-        return posts.get(id);
+        return postStore.get(id);
     }
 
     public void update(Post post) {
-        posts.replace(post.getId(), post);
+        postStore.replace(post.getId(), post);
     }
-
 }

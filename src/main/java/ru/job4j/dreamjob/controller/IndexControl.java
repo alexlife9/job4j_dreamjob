@@ -4,7 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 /**
- * Генератор HTML
+ * Главная страница
  *
  * Передаем на клиент(браузер в данном случае) текст в виде HTML.
  * Браузер использует язык HTML для отображения содержимого страницы.
@@ -21,8 +21,8 @@ import org.springframework.web.bind.annotation.GetMapping;
  * Файл index.html находится по пути: src/main/resources/templates/index.html
  *
  * @author Alex_life
- * @version 2.0
- * @since 06.10.2022
+ * @version 3.0
+ * @since 08.10.2022
  */
 @Controller
 public class IndexControl {

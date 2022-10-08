@@ -4,11 +4,11 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 
 /**
- * Список Вакансий
+ * Модель кандидата
  *
  * @author Alex_life
- * @version 1.0
- * @since 06.10.2022
+ * @version 2.0
+ * @since 08.10.2022
  */
 public class Candidate {
     private int id;
