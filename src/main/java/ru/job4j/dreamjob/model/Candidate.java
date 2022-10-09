@@ -7,7 +7,7 @@ import java.util.Objects;
  * Модель кандидата
  *
  * @author Alex_life
- * @version 3.0
+ * @version 4.0
  * @since 09.10.2022
  */
 public class Candidate {
@@ -17,6 +17,7 @@ public class Candidate {
     private LocalDateTime created;
     private boolean visible;
     private City city;
+    private byte[] photo;
 
     public Candidate() {
     }
@@ -75,6 +76,14 @@ public class Candidate {
 
     public void setCity(City city) {
         this.city = city;
+    }
+
+    public byte[] getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(byte[] photo) {
+        this.photo = photo;
     }
 
     @Override
