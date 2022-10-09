@@ -11,17 +11,16 @@ import java.util.Collection;
  * Слоеная архитектура
  *
  * @author Alex_life
- * @version 2.0
+ * @version 3.0
  * @since 09.10.2022
  */
 @ThreadSafe
 @Service
 public class CandidateService {
-    private static final CandidateService INST = new CandidateService();
-    private final CandidateStore storeCandidate = CandidateStore.instOf();
+    private final CandidateStore storeCandidate;
 
-    public static CandidateService instOf() {
-        return INST;
+    public CandidateService(CandidateStore store) {
+        this.storeCandidate = store;
     }
 
     public Collection<Candidate> findAll() {

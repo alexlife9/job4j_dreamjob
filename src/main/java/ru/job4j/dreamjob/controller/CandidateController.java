@@ -18,13 +18,18 @@ import java.time.LocalDateTime;
  * После запуска программы открываем браузер по ссылке http:\\localhost:8080/candidates
  *
  * @author Alex_life
- * @version 3.0
+ * @version 4.0
  * @since 09.10.2022
  */
 @ThreadSafe
 @Controller
 public class CandidateController {
-    private final CandidateService candidateService = CandidateService.instOf();
+    private final CandidateService candidateService;
+
+    public CandidateController(CandidateService candidate) {
+        this.candidateService = candidate;
+    }
+
 
     @GetMapping("/candidates")
     public String candidates(Model model) {

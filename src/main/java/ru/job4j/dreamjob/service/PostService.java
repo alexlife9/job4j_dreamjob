@@ -46,17 +46,16 @@ import java.util.Collection;
  * и делаете сквозные вызовы классов персистенции.
  *
  * @author Alex_life
- * @version 2.0
+ * @version 3.0
  * @since 09.10.2022
  */
 @ThreadSafe
 @Service
 public class PostService {
-    private static final PostService INST = new PostService();
-    private final PostStore storePost = PostStore.instOf();
+    private final PostStore storePost;
 
-    public static PostService instOf() {
-        return INST;
+    public PostService(PostStore store) {
+        this.storePost = store;
     }
 
     public Collection<Post> findAll() {

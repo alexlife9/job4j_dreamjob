@@ -21,14 +21,18 @@ import java.time.LocalDateTime;
  * Thymeleaf генерирует HTML и возвращает ее клиенту.
  *
  * @author Alex_life
- * @version 5.0
+ * @version 6.0
  * @since 09.10.2022
  */
 @ThreadSafe
 @Controller
 public class PostController {
-    private final PostService postService = PostService.instOf();
+    private final PostService postService;
     private final CityService cityService = new CityService();
+
+    public PostController(PostService postService) {
+        this.postService = postService;
+    }
 
     @GetMapping("/posts")
     public String posts(Model model) {

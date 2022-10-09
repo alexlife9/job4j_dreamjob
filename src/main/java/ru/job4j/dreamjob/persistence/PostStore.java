@@ -23,17 +23,11 @@ import java.util.concurrent.atomic.AtomicInteger;
 @Repository
 public class PostStore {
 
-    private static final PostStore INST = new PostStore();
-
     private final AtomicInteger idS = new AtomicInteger(1); /* начальный серийный айди = 1 */
 
     private final Map<Integer, Post> postStore = new ConcurrentHashMap<>();
 
     private PostStore() {
-    }
-
-    public static PostStore instOf() {
-        return INST;
     }
 
     public Collection<Post> findAll() {
