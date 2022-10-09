@@ -21,7 +21,7 @@ import java.time.LocalDateTime;
  * Thymeleaf генерирует HTML и возвращает ее клиенту.
  *
  * @author Alex_life
- * @version 6.0
+ * @version 5.0
  * @since 09.10.2022
  */
 @ThreadSafe

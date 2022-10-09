@@ -15,6 +15,8 @@ public class Candidate {
     private String name;
     private String desc;
     private LocalDateTime created;
+    private boolean visible;
+    private City city;
 
     public Candidate() {
     }
@@ -56,6 +58,14 @@ public class Candidate {
 
     public void setCreated(LocalDateTime created) {
         this.created = created;
+    }
+
+    public boolean isVisible() {
+        return visible;
+    }
+
+    public Candidate(boolean visible) {
+        this.visible = visible;
     }
 
     @Override
