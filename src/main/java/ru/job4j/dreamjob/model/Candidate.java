@@ -7,8 +7,8 @@ import java.util.Objects;
  * Модель кандидата
  *
  * @author Alex_life
- * @version 2.0
- * @since 08.10.2022
+ * @version 3.0
+ * @since 09.10.2022
  */
 public class Candidate {
     private int id;
@@ -21,11 +21,12 @@ public class Candidate {
     public Candidate() {
     }
 
-    public Candidate(int id, String name, String desc, LocalDateTime created) {
+    public Candidate(int id, String name, String desc, LocalDateTime created, City city) {
         this.id = id;
         this.name = name;
         this.desc = desc;
         this.created = created;
+        this.city = city;
     }
 
     public int getId() {
@@ -64,8 +65,16 @@ public class Candidate {
         return visible;
     }
 
-    public Candidate(boolean visible) {
+    public void setVisible(boolean visible) {
         this.visible = visible;
+    }
+
+    public City getCity() {
+        return city;
+    }
+
+    public void setCity(City city) {
+        this.city = city;
     }
 
     @Override

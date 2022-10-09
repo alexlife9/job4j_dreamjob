@@ -48,6 +48,12 @@
                         <input type="text" class="form-control" name="name" id="name" th:field="*{name}">
                     </div>
                     <div class="form-group">
+                        <label for="city.id">Город</label>
+                        <select class="form-control" id="city.id" name="city.id">
+                            <option th:each="city : ${cities}" th:value="${city.id}" th:text="${city.name}"></option>
+                        </select>
+                    </div>
+                    <div class="form-group">
                         <label for="name">Описание вакансии</label>
                         <input type="text" class="form-control" name="desc" id="desc" th:field="*{desc}">
                     </div>

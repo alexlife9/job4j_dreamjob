@@ -26,8 +26,8 @@ import java.util.Objects;
  *
  *
  * @author Alex_life
- * @version 4.0
- * @since 08.10.2022
+ * @version 5.0
+ * @since 09.10.2022
  */
 public class Post implements Serializable {
     private int id;
@@ -40,11 +40,12 @@ public class Post implements Serializable {
     public Post() {
     }
 
-    public Post(int id, String name, String description, LocalDateTime created) {
+    public Post(int id, String name, String description, LocalDateTime created, City city) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.created = created;
+        this.city = city;
     }
 
     public int getId() {
@@ -85,6 +86,14 @@ public class Post implements Serializable {
 
     public void setVisible(boolean visible) {
         this.visible = visible;
+    }
+
+    public City getCity() {
+        return city;
+    }
+
+    public void setCity(City city) {
+        this.city = city;
     }
 
     @Override
