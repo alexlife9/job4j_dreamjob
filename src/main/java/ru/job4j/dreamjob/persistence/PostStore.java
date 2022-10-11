@@ -16,8 +16,8 @@ import java.util.concurrent.atomic.AtomicInteger;
  * Хранит добавленные из браузера вакансии
  *
  * @author Alex_life
- * @version 7.0
- * @since 09.10.2022
+ * @version 8.0
+ * @since 11.10.2022
  */
 @ThreadSafe
 @Repository
@@ -26,9 +26,6 @@ public class PostStore {
     private final AtomicInteger idS = new AtomicInteger(1); /* начальный серийный айди = 1 */
 
     private final Map<Integer, Post> postStore = new ConcurrentHashMap<>();
-
-    private PostStore() {
-    }
 
     public Collection<Post> findAll() {
         return postStore.values();

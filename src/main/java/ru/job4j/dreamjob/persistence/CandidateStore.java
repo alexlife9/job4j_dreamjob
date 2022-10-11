@@ -14,8 +14,8 @@ import java.util.concurrent.atomic.AtomicInteger;
  * Хранилище добавленных кандидатов
  *
  * @author Alex_life
- * @version 4.0
- * @since 09.10.2022
+ * @version 5.0
+ * @since 11.10.2022
  */
 @ThreadSafe
 @Repository
@@ -24,9 +24,6 @@ public class CandidateStore {
     private final AtomicInteger idS = new AtomicInteger(1);
 
     private final Map<Integer, Candidate> candidateStore = new ConcurrentHashMap<>();
-
-    private CandidateStore() {
-    }
 
     public Collection<Candidate> findAll() {
         return candidateStore.values();
