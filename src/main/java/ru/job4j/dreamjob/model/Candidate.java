@@ -6,6 +6,7 @@ import java.util.Objects;
 /**
  * Модель кандидата
  *
+ *
  * @author Alex_life
  * @version 4.0
  * @since 09.10.2022
