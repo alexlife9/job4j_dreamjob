@@ -1,6 +1,6 @@
 package ru.job4j.dreamjob.service;
 
-import org.apache.http.annotation.ThreadSafe;
+import net.jcip.annotations.ThreadSafe;
 import org.springframework.stereotype.Service;
 import ru.job4j.dreamjob.model.Candidate;
 import ru.job4j.dreamjob.persistence.CandidateStore;
@@ -18,9 +18,11 @@ import java.util.Collection;
 @Service
 public class CandidateService {
     private final CandidateStore storeCandidate;
+    private final CityService cityService;
 
-    public CandidateService(CandidateStore store) {
+    public CandidateService(CandidateStore store, CityService city) {
         this.storeCandidate = store;
+        this.cityService = city;
     }
 
     public Collection<Candidate> findAll() {
