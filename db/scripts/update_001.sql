@@ -3,5 +3,5 @@ CREATE TABLE post (
    name VARCHAR(100),
    description TEXT,
    created DATE,
-   city VARCHAR(100)
+   city_id INT
 );
