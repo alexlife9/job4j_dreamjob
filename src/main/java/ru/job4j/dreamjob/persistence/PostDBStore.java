@@ -24,21 +24,15 @@ import org.slf4j.LoggerFactory;
 public class PostDBStore {
     private final BasicDataSource pool;
     private static final Logger LOG = LoggerFactory.getLogger(PostDBStore.class.getName());
-    private static final String SQL_SELECT_ALL =
-            "SELECT * FROM post"
-            + "ORDER BY id";
+    private static final String SQL_SELECT_ALL = "SELECT * FROM post ORDER BY id";
 
     private static final String SQL_INSERT =
-            "INSERT INTO post(name, description, created, city_id)"
-            + "VALUES (?, ?, ?, ?)";
+            "INSERT INTO post(name, description, created, city_id) VALUES (?, ?, ?, ?)";
 
     private static final String SQL_UPDATE =
-            "UPDATE post SET name = ?, description = ?, created = ?, city_id = ?"
-            + " WHERE id = ?";
+            "UPDATE post SET name = ?, description = ?, created = ?, city_id = ? WHERE id = ?";
 
-    private static final String SQL_FIND_ID =
-            "SELECT * FROM post"
-            + "WHERE id = ?";
+    private static final String SQL_FIND_ID = "SELECT * FROM post WHERE id = ?";
 
     public PostDBStore(BasicDataSource pool) {
         this.pool = pool;

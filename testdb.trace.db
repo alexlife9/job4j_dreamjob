@@ -1,0 +1,39 @@
+2022-10-15 17:30:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "POST" not found (this database is empty); SQL statement:
+INSERT INTO post(name, description, created, city_id)VALUES (?, ?, ?, ?) [42104-214]
+2022-10-15 17:30:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "POSTWHERE" not found (this database is empty); SQL statement:
+SELECT * FROM postWHERE id = ? [42104-214]
+2022-10-15 17:31:33 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "POST" not found (this database is empty); SQL statement:
+INSERT INTO post(name, description, created, city_id)VALUES (?, ?, ?, ?) [42104-214]
+2022-10-15 17:31:33 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "POSTWHERE" not found (this database is empty); SQL statement:
+SELECT * FROM postWHERE id = ? [42104-214]
+2022-10-15 17:32:22 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "DATABASECHANGELOGLOCK" not found (this database is empty); SQL statement:
+SELECT COUNT(*) FROM DATABASECHANGELOGLOCK [42104-214]
+2022-10-15 17:32:57 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Таблица "POSTWHERE" не найдена
+Table "POSTWHERE" not found; SQL statement:
+SELECT * FROM postWHERE id = ? [42102-214]
+2022-10-15 17:44:36 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Таблица "POSTWHERE" не найдена
+Table "POSTWHERE" not found; SQL statement:
+SELECT * FROM postWHERE id = ? [42102-214]
+2022-10-15 17:45:27 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Таблица "POSTWHERE" не найдена
+Table "POSTWHERE" not found; SQL statement:
+SELECT * FROM postWHERE id = ? [42102-214]
+2022-10-15 17:46:09 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Таблица "POSTWHERE" не найдена
+Table "POSTWHERE" not found; SQL statement:
+SELECT * FROM postWHERE id = ? [42102-214]
+2022-10-15 17:47:21 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Таблица "POSTWHERE" не найдена
+Table "POSTWHERE" not found; SQL statement:
+SELECT * FROM postWHERE id = ? [42102-214]
+2022-10-15 17:48:13 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Таблица "POSTWHERE" не найдена
+Table "POSTWHERE" not found; SQL statement:
+SELECT * FROM postWHERE id = ? [42102-214]
