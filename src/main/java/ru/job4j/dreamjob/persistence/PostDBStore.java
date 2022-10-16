@@ -22,7 +22,7 @@ import org.slf4j.LoggerFactory;
 @ThreadSafe
 @Repository
 public class PostDBStore {
-    private final BasicDataSource pool;
+    private final BasicDataSource pool; /* пул соединений с базой */
     private static final Logger LOG = LoggerFactory.getLogger(PostDBStore.class.getName());
     private static final String SQL_SELECT_ALL = "SELECT * FROM post ORDER BY id";
 
