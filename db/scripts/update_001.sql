@@ -1,31 +1,32 @@
 CREATE TABLE IF NOT EXISTS cities
 (
     id   SERIAL PRIMARY KEY,
-    name VARCHAR(100)
+    name TEXT
 );
 
 CREATE TABLE IF NOT EXISTS post
 (
     id          SERIAL PRIMARY KEY,
-    name        VARCHAR(100),
+    name        TEXT,
     description TEXT,
     created     DATE,
-    city_id     INT REFERENCES cities (id)
+    city_id     INT REFERENCES cities(id)
 );
 
 CREATE TABLE IF NOT EXISTS candidate
 (
     id          SERIAL PRIMARY KEY,
-    name        VARCHAR(100),
+    name        TEXT,
     description TEXT,
     created     DATE,
-    city_id     INT REFERENCES cities (id)
+    city_id     INT REFERENCES cities(id)
 );
 
 CREATE TABLE IF NOT EXISTS users
 (
     id       SERIAL PRIMARY KEY,
-    name     VARCHAR(100) UNIQUE,
-    email    VARCHAR(100) UNIQUE,
-    password TEXT
+    name     TEXT UNIQUE,
+    email    TEXT UNIQUE,
+    password TEXT,
+    created  DATE
 );

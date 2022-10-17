@@ -25,7 +25,6 @@ public class PostDBStore {
     private final BasicDataSource pool; /* пул соединений с базой */
     private static final Logger LOG = LoggerFactory.getLogger(PostDBStore.class.getName());
     private static final String SQL_SELECT_ALL = "SELECT * FROM post ORDER BY id";
-
     private static final String SQL_INSERT =
             "INSERT INTO post(name, description, created, city_id) VALUES (?, ?, ?, ?)";
 
