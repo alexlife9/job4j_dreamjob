@@ -1,4 +1,4 @@
-package ru.job4j.dreamjob.persistence;
+package ru.job4j.dreamjob.store;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -13,7 +13,7 @@ import java.util.List;
 /**
  * @author Alex_life
  * @version 1.0
- * @since 16.10.2022
+ * @since 18.10.2022
  */
 class UserDBStoreTest {
     private static UserDBStore userStore;
@@ -36,7 +36,7 @@ class UserDBStoreTest {
 
     @Test
     void addUser() {
-        User user = new User(0, "a", "a@a.a", "a", LocalDateTime.now());
+        User user = new User(1, "a", "a@a.a", "a", LocalDateTime.now());
         userStore.addUser(user);
         Assertions.assertEquals(1, userStore.findAll().size());
         Assertions.assertTrue(userStore.findAll().contains(user));

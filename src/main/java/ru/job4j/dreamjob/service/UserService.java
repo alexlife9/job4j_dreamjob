@@ -3,16 +3,17 @@ package ru.job4j.dreamjob.service;
 import net.jcip.annotations.ThreadSafe;
 import org.springframework.stereotype.Service;
 import ru.job4j.dreamjob.model.User;
-import ru.job4j.dreamjob.persistence.UserDBStore;
+import ru.job4j.dreamjob.store.UserDBStore;
 
 import java.util.Collection;
+import java.util.Optional;
 
 /**
  * Сервис описывающий логику поведения пользователя
  *
  * @author Alex_life
  * @version 1.0
- * @since 16.10.2022
+ * @since 18.10.2022
  */
 @ThreadSafe
 @Service
@@ -27,8 +28,8 @@ public class UserService {
         return storeUser.findAll();
     }
 
-    public void addUser(User user) {
-        storeUser.addUser(user);
+    public Optional<User> addUser(User user) {
+        return storeUser.addUser(user);
     }
 
     public User findByIdUser(int id) {

@@ -1,4 +1,4 @@
-package ru.job4j.dreamjob.persistence;
+package ru.job4j.dreamjob.store;
 
 import net.jcip.annotations.ThreadSafe;
 import org.apache.commons.dbcp2.BasicDataSource;
@@ -10,11 +10,12 @@ import ru.job4j.dreamjob.model.User;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author Alex_life
  * @version 1.0
- * @since 16.10.2022
+ * @since 18.10.2022
  */
 @ThreadSafe
 @Repository
@@ -51,7 +52,8 @@ public class UserDBStore {
         return users;
     }
 
-    public void addUser(User user) {
+    public Optional<User> addUser(User user) {
+        Optional<User> check = Optional.empty();
         try (Connection cn = pool.getConnection();
              PreparedStatement ps = cn.prepareStatement(SQL_INSERT, PreparedStatement.RETURN_GENERATED_KEYS)) {
             ps.setString(1, user.getName());
@@ -64,9 +66,11 @@ public class UserDBStore {
                     user.setId(id.getInt(1));
                 }
             }
+            check = Optional.of(user);
         } catch (Exception e) {
             LOG.error("UserDBStore. Ошибка в методе addUser - ", e);
         }
+        return check;
     }
 
     public User findByIdUser(int id) {
@@ -123,8 +127,7 @@ public class UserDBStore {
             ps.setString(1, user.getName());
             ps.setString(2, user.getEmail());
             ps.setString(3, user.getPassword());
-            ps.setTimestamp(4, Timestamp.valueOf(user.getCreated()));
-            ps.setInt(5, user.getId());
+            ps.setInt(4, user.getId());
             ps.execute();
         } catch (Exception e) {
             LOG.error("UserDBStore. Ошибка в методе updateUser - ", e);

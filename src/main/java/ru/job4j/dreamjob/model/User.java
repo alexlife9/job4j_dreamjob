@@ -8,7 +8,7 @@ import java.util.Objects;
  *
  * @author Alex_life
  * @version 1.0
- * @since 16.10.2022
+ * @since 18.10.2022
  */
 public class User {
     private int id;
@@ -83,16 +83,5 @@ public class User {
     @Override
     public int hashCode() {
         return Objects.hash(id);
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                ", created=" + created +
-                '}';
     }
 }
