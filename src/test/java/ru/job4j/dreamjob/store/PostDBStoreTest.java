@@ -15,8 +15,8 @@ import java.util.List;
  * Тестирование базы данных. Liquibase H2
  *
  * @author Alex_life
- * @version 1.0
- * @since 15.10.2022
+ * @version 2.0
+ * @since 18.10.2022
  */
 public class PostDBStoreTest {
     private static PostDBStore postStore;
@@ -29,11 +29,19 @@ public class PostDBStoreTest {
 
     @Test
     void findAll() {
-        Post post1 = new Post(1, "a", "a", LocalDateTime.now(), new City(3, "a"));
-        Post post2 = new Post(2, "b", "b", LocalDateTime.now(), new City(4, "b"));
+        Post post1 = new Post(1, "a", "a", LocalDateTime.now(), new City(1, "a"));
+        Post post2 = new Post(2, "b", "b", LocalDateTime.now(), new City(2, "b"));
         postStore.addPost(post1);
         postStore.addPost(post2);
         List<Post> all = postStore.findAll();
         Assertions.assertEquals(2, all.size());
+    }
+
+    @Test
+    void addPost() {
+        Post post1 = new Post(1, "a", "a", LocalDateTime.now(), new City(1, "a"));
+        postStore.addPost(post1);
+        Assertions.assertEquals(1, postStore.findAll().size());
+        Assertions.assertTrue(postStore.findAll().contains(post1));
     }
 }
