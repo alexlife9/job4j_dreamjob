@@ -7,27 +7,9 @@ import java.util.Objects;
 /**
  * Модель вакансии
  *
- * Затронем идею шаблона проектирования MVC (Model, View, Control).
- * Весь пользовательский интерфейс можно разбить на отдельные экраны или виды.
- * Вид – это статический элемент программы. Он отображает формы и элементы.
- * Самым важным элементом программы являются данные. Данные отображаются в виде.
- * Чтобы данные залезли в вид, ими должен управлять контроллер. Он знает, какие данные засунуть в вид.
- *
- * View – это HTML.
- * Model – это данные нашего приложения.
- * Controller - связующее звено между видом и моделью.
- *
- * Класс Post описывает вакансии.
- * Класс PostStore описывает хранилище.
- * Post и PostStore - это модели данных.
- * файл posts.html описывает Вид.
- *
- * посмотреть результат - http:\\localhost:8080/posts
- *
- *
  * @author Alex_life
- * @version 5.0
- * @since 09.10.2022
+ * @version 6.0
+ * @since 18.10.2022
  */
 public class Post implements Serializable {
     private int id;
@@ -45,6 +27,15 @@ public class Post implements Serializable {
         this.name = name;
         this.description = description;
         this.created = created;
+        this.city = city;
+    }
+
+    public Post(int id, String name, String description, LocalDateTime created, boolean visible, City city) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.created = created;
+        this.visible = visible;
         this.city = city;
     }
 
@@ -111,15 +102,5 @@ public class Post implements Serializable {
     @Override
     public int hashCode() {
         return Objects.hash(id);
-    }
-
-    @Override
-    public String toString() {
-        return "Post{"
-                + "id=" + id
-                + ", name='" + name + '\''
-                + ", description='" + description + '\''
-                + ", created=" + created
-                + '}';
     }
 }

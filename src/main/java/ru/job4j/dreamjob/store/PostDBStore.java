@@ -1,4 +1,4 @@
-package ru.job4j.dreamjob.persistence;
+package ru.job4j.dreamjob.store;
 
 import net.jcip.annotations.ThreadSafe;
 import org.apache.commons.dbcp2.BasicDataSource;
@@ -7,6 +7,7 @@ import ru.job4j.dreamjob.model.City;
 import ru.job4j.dreamjob.model.Post;
 
 import java.sql.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import org.slf4j.Logger;
@@ -16,8 +17,8 @@ import org.slf4j.LoggerFactory;
  * Подключение к базе в веб приложении. Хранение вакансий
  *
  * @author Alex_life
- * @version 2.0
- * @since 15.10.2022
+ * @version 3.0
+ * @since 18.10.2022
  */
 @ThreadSafe
 @Repository
@@ -57,7 +58,7 @@ public class PostDBStore {
              PreparedStatement ps = cn.prepareStatement(SQL_INSERT, PreparedStatement.RETURN_GENERATED_KEYS)) {
             ps.setString(1, post.getName());
             ps.setString(2, post.getDescription());
-            ps.setTimestamp(3, Timestamp.valueOf(post.getCreated()));
+            ps.setTimestamp(3, Timestamp.valueOf(LocalDateTime.now()));
             ps.setInt(4, post.getCity().getId());
             ps.execute();
             try (ResultSet id = ps.getGeneratedKeys()) {
@@ -106,7 +107,7 @@ public class PostDBStore {
                 it.getString("name"),
                 it.getString("description"),
                 it.getTimestamp("created").toLocalDateTime(),
-                new City(it.getInt("city_id"))
+                new City(it.getInt("city_id"), null)
         );
     }
 }

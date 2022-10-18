@@ -3,7 +3,7 @@ package ru.job4j.dreamjob.service;
 import net.jcip.annotations.ThreadSafe;
 import org.springframework.stereotype.Service;
 import ru.job4j.dreamjob.model.Candidate;
-import ru.job4j.dreamjob.persistence.CandidateDBStore;
+import ru.job4j.dreamjob.store.CandidateDBStore;
 
 import java.util.Collection;
 import java.util.List;
@@ -12,8 +12,8 @@ import java.util.List;
  * Сервис связывающий модель кандидатов с базой данных кандидатов
  *
  * @author Alex_life
- * @version 4.0
- * @since 16.10.2022
+ * @version 5.0
+ * @since 18.10.2022
  */
 @ThreadSafe
 @Service

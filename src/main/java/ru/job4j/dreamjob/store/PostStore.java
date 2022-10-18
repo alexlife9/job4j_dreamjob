@@ -1,4 +1,4 @@
-package ru.job4j.dreamjob.persistence;
+package ru.job4j.dreamjob.store;
 
 import net.jcip.annotations.ThreadSafe;
 import org.springframework.stereotype.Repository;
@@ -22,9 +22,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 @ThreadSafe
 @Repository
 public class PostStore {
-
     private final AtomicInteger idS = new AtomicInteger(1); /* начальный серийный айди = 1 */
-
     private final Map<Integer, Post> postStore = new ConcurrentHashMap<>();
 
     public Collection<Post> findAll() {

@@ -1,5 +1,6 @@
 package ru.job4j.dreamjob.model;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
@@ -8,10 +9,10 @@ import java.util.Objects;
  *
  *
  * @author Alex_life
- * @version 5.0
- * @since 16.10.2022
+ * @version 6.0
+ * @since 18.10.2022
  */
-public class Candidate {
+public class Candidate implements Serializable {
     private int id;
     private String name;
     private String description;
@@ -29,6 +30,17 @@ public class Candidate {
         this.description = description;
         this.created = created;
         this.city = city;
+    }
+
+    public Candidate(int id, String name, String description, LocalDateTime created,
+                     boolean visible, City city, byte[] photo) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.created = created;
+        this.visible = visible;
+        this.city = city;
+        this.photo = photo;
     }
 
     public int getId() {
@@ -102,15 +114,5 @@ public class Candidate {
     @Override
     public int hashCode() {
         return Objects.hash(id);
-    }
-
-    @Override
-    public String toString() {
-        return "Candidate{"
-                + "id=" + id
-                + ", name='" + name + '\''
-                + ", desc='" + description + '\''
-                + ", created=" + created
-                + '}';
     }
 }

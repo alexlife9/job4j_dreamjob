@@ -6,18 +6,14 @@ import java.util.Objects;
  * Модель города
  *
  * @author Alex_life
- * @version 1.0
- * @since 09.10.2022
+ * @version 2.0
+ * @since 18.10.2022
  */
 public class City {
     private int id;
     private String name;
 
     public City() {
-    }
-
-    public City(int id) {
-        this.id = id;
     }
 
     public City(int id, String name) {

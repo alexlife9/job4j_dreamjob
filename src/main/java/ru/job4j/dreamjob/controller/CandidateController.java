@@ -12,7 +12,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import ru.job4j.dreamjob.model.Candidate;
-import ru.job4j.dreamjob.model.City;
 import ru.job4j.dreamjob.service.CandidateService;
 import ru.job4j.dreamjob.service.CityService;
 
@@ -22,11 +21,9 @@ import java.time.LocalDateTime;
 /**
  * Контроллер для кандидатов
  *
- * После запуска программы открываем браузер по ссылке http:\\localhost:8080/candidates
- *
  * @author Alex_life
- * @version 6.0
- * @since 09.10.2022
+ * @version 7.0
+ * @since 18.10.2022
  */
 @ThreadSafe
 @Controller
@@ -49,16 +46,16 @@ public class CandidateController {
     @GetMapping("/formAddCandidate")
     public String addCandidate(Model model) {
         model.addAttribute("candidates",
-                new Candidate(0, "Заполните поле", "Заполните поле", LocalDateTime.now(),
-                        new City(0, "Выберите город из списка")));
+                new Candidate(0, "Заполните поле", "Заполните поле", LocalDateTime.now(), null));
         model.addAttribute("cities", cityService.getAllCities());
-        return "AddCandidate";
+        return "addCandidate";
     }
 
     @PostMapping("/createCandidate")
     public String createCandidate(@ModelAttribute Candidate candidate,
                                   @RequestParam("file") MultipartFile file) throws IOException {
         candidate.setCity(cityService.findById(candidate.getCity().getId()));
+        candidate.setCreated(LocalDateTime.now());
         candidate.setPhoto(file.getBytes());
         candidateService.addCandidate(candidate);
         return "redirect:/candidates";

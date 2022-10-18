@@ -6,16 +6,10 @@ import org.junit.jupiter.api.Test;
 import ru.job4j.dreamjob.Main;
 import ru.job4j.dreamjob.model.City;
 import ru.job4j.dreamjob.model.Post;
-import ru.job4j.dreamjob.model.User;
-import ru.job4j.dreamjob.persistence.PostDBStore;
-import ru.job4j.dreamjob.persistence.UserDBStore;
 
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.List;
-
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.is;
 
 /**
  * Тестирование базы данных. Liquibase H2
@@ -25,12 +19,21 @@ import static org.hamcrest.Matchers.is;
  * @since 15.10.2022
  */
 public class PostDBStoreTest {
+    private static PostDBStore postStore;
+
+    @BeforeEach
+    void before() throws SQLException {
+        new Main().loadPool().getConnection().prepareStatement("delete from post").execute();
+        postStore = new PostDBStore(new Main().loadPool());
+    }
+
     @Test
-    public void whenCreatePost() {
-        PostDBStore store = new PostDBStore(new Main().loadPool());
-        Post post = new Post(1, "Java Job", "jj", LocalDateTime.now(), new City(1));
-        store.addPost(post);
-        Post postInDb = store.findByIdPost(post.getId());
-        assertThat(postInDb.getName(), is(post.getName()));
+    void findAll() {
+        Post post1 = new Post(1, "a", "a", LocalDateTime.now(), new City(3, "a"));
+        Post post2 = new Post(2, "b", "b", LocalDateTime.now(), new City(4, "b"));
+        postStore.addPost(post1);
+        postStore.addPost(post2);
+        List<Post> all = postStore.findAll();
+        Assertions.assertEquals(2, all.size());
     }
 }

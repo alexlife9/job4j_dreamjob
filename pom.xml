@@ -179,9 +179,13 @@
         <version>3.6.2</version>
         <configuration>
           <changeLogFile>${basedir}/db/master.xml</changeLogFile>
+          <!--suppress UnresolvedMavenProperty -->
           <url>${db.url}</url>
+          <!--suppress UnresolvedMavenProperty -->
           <driver>${db.driver}</driver>
+          <!--suppress UnresolvedMavenProperty -->
           <username>${db.username}</username>
+          <!--suppress UnresolvedMavenProperty -->
           <password>${db.password}</password>
           <promptOnNonLocalDatabase>false</promptOnNonLocalDatabase>
         </configuration>
@@ -203,8 +207,8 @@
       <id>test</id>
       <properties>
         <db.url>jdbc:h2:${basedir}/testdb;MODE=PostgreSQL;CASE_INSENSITIVE_IDENTIFIERS=TRUE;</db.url>
-        <db.username></db.username>
-        <db.password></db.password>
+        <db.username/>
+        <db.password/>
         <db.driver>org.h2.Driver</db.driver>
       </properties>
       <activation>

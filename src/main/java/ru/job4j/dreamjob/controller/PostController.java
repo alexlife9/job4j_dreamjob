@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import ru.job4j.dreamjob.model.City;
 import ru.job4j.dreamjob.model.Post;
 import ru.job4j.dreamjob.service.CityService;
 import ru.job4j.dreamjob.service.PostService;
@@ -22,8 +21,8 @@ import java.time.LocalDateTime;
  * Thymeleaf генерирует HTML и возвращает ее клиенту.
  *
  * @author Alex_life
- * @version 6.0
- * @since 09.10.2022
+ * @version 7.0
+ * @since 18.10.2022
  */
 @ThreadSafe
 @Controller
@@ -45,8 +44,7 @@ public class PostController {
     @GetMapping("/formAddPost")
     public String addPost(Model model) {
         model.addAttribute("posts",
-                new Post(0, "Заполните поле", "Заполните поле", LocalDateTime.now(),
-                        new City(0, "Выберите город из списка")));
+                new Post(0, "Заполните поле", "Заполните поле", LocalDateTime.now(), null));
         model.addAttribute("cities", cityService.getAllCities());
         return "addPost";
     }
@@ -54,6 +52,7 @@ public class PostController {
     @PostMapping("/createPost")
     public String createPost(@ModelAttribute Post post) {
         post.setCity(cityService.findById(post.getCity().getId()));
+        post.setCreated(LocalDateTime.now());
         postService.addPost(post);
         return "redirect:/posts";
     }

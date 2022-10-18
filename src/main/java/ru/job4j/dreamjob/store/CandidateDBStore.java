@@ -1,11 +1,13 @@
-package ru.job4j.dreamjob.persistence;
+package ru.job4j.dreamjob.store;
 
+import net.jcip.annotations.ThreadSafe;
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.springframework.stereotype.Repository;
 import ru.job4j.dreamjob.model.Candidate;
 import ru.job4j.dreamjob.model.City;
 
 import java.sql.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import org.slf4j.Logger;
@@ -15,9 +17,10 @@ import org.slf4j.LoggerFactory;
  * Подключение к базе в веб приложении. Хранение кандидатов
  *
  * @author Alex_life
- * @version 1.0
- * @since 16.10.2022
+ * @version 2.0
+ * @since 18.10.2022
  */
+@ThreadSafe
 @Repository
 public class CandidateDBStore {
     private final BasicDataSource pool; /* пул соединений с базой */
@@ -56,7 +59,7 @@ public class CandidateDBStore {
              PreparedStatement ps = cn.prepareStatement(SQL_INSERT, PreparedStatement.RETURN_GENERATED_KEYS)) {
             ps.setString(1, candidate.getName());
             ps.setString(2, candidate.getDescription());
-            ps.setTimestamp(3, Timestamp.valueOf(candidate.getCreated()));
+            ps.setTimestamp(3, Timestamp.valueOf(LocalDateTime.now()));
             ps.setInt(4, candidate.getCity().getId());
             ps.execute();
             try (ResultSet id = ps.getGeneratedKeys()) {
@@ -105,7 +108,7 @@ public class CandidateDBStore {
                 it.getString("name"),
                 it.getString("description"),
                 it.getTimestamp("created").toLocalDateTime(),
-                new City(it.getInt("city_id"))
+                new City(it.getInt("city_id"), null)
         );
     }
 }

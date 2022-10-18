@@ -3,6 +3,7 @@ package ru.job4j.dreamjob.service;
 import net.jcip.annotations.ThreadSafe;
 import org.springframework.stereotype.Service;
 import ru.job4j.dreamjob.model.City;
+import ru.job4j.dreamjob.model.Post;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -13,8 +14,8 @@ import java.util.Map;
  * Сервис для связи между Post и City
  *
  * @author Alex_life
- * @version 1.0
- * @since 09.10.2022
+ * @version 2.0
+ * @since 18.10.2022
  */
 @ThreadSafe
 @Service
