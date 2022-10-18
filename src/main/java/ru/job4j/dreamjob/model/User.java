@@ -7,7 +7,7 @@ import java.util.Objects;
  * Модель пользователя сайта
  *
  * @author Alex_life
- * @version 1.0
+ * @version 2.0
  * @since 18.10.2022
  */
 public class User {

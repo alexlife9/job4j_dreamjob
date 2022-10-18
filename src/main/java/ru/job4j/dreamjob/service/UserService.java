@@ -12,7 +12,7 @@ import java.util.Optional;
  * Сервис описывающий логику поведения пользователя
  *
  * @author Alex_life
- * @version 1.0
+ * @version 2.0
  * @since 18.10.2022
  */
 @ThreadSafe
@@ -51,5 +51,10 @@ public class UserService {
     public void delete(User user) {
         storeUser.delete(user);
     }
+
+    public Optional<User> findUserByEmailAndPwd(String email, String password) {
+        return storeUser.findUserByEmailAndPwd(email, password);
+    }
+
 
 }

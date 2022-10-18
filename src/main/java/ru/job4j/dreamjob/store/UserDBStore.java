@@ -14,7 +14,7 @@ import java.util.Optional;
 
 /**
  * @author Alex_life
- * @version 1.0
+ * @version 2.0
  * @since 18.10.2022
  */
 @ThreadSafe
@@ -32,6 +32,8 @@ public class UserDBStore {
     private static final String SQL_FIND_ID = "SELECT * FROM users WHERE id = ?";
     private static final String SQL_FIND_NAME = "SELECT * FROM users WHERE name = ?";
     private static final String SQL_FIND_EMAIL = "SELECT * FROM users WHERE email = ?";
+    private static final String SQL_FIND_NAME_AND_EMAIL =
+            "SELECT * FROM users WHERE users.email LIKE ? AND users.password LIKE ?;";
 
     public UserDBStore(BasicDataSource pool) {
         this.pool = pool;
@@ -145,5 +147,22 @@ public class UserDBStore {
                 it.getString("password"),
                 it.getTimestamp("created").toLocalDateTime()
         );
+    }
+
+    public Optional<User> findUserByEmailAndPwd(String email, String password) {
+        Optional<User> check = Optional.empty();
+        try (Connection cn = pool.getConnection();
+             PreparedStatement ps =  cn.prepareStatement(SQL_FIND_NAME_AND_EMAIL)) {
+            ps.setString(1, email);
+            ps.setString(2, password);
+            try (ResultSet it = ps.executeQuery()) {
+                if (it.next()) {
+                    check = Optional.of(createNewUser(it));
+                }
+            }
+        } catch (Exception e) {
+            LOG.error("UserDBStore. Ошибка в методе findUserByEmailAndPwd - ", e);
+        }
+        return check;
     }
 }
