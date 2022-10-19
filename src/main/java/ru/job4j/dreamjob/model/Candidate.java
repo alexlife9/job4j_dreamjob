@@ -9,8 +9,8 @@ import java.util.Objects;
  *
  *
  * @author Alex_life
- * @version 6.0
- * @since 18.10.2022
+ * @version 7.0
+ * @since 19.10.2022
  */
 public class Candidate implements Serializable {
     private int id;
@@ -24,12 +24,13 @@ public class Candidate implements Serializable {
     public Candidate() {
     }
 
-    public Candidate(int id, String name, String description, LocalDateTime created, City city) {
+    public Candidate(int id, String name, String description, LocalDateTime created, City city, byte[] photo) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.created = created;
         this.city = city;
+        this.photo = photo;
     }
 
     public Candidate(int id, String name, String description, LocalDateTime created,

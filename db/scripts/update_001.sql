@@ -13,7 +13,8 @@ CREATE TABLE IF NOT EXISTS candidate
     name        TEXT,
     description TEXT,
     created     DATE,
-    city_id     INT
+    city_id     INT,
+    photo       BYTEA
 );
 
 CREATE TABLE IF NOT EXISTS users

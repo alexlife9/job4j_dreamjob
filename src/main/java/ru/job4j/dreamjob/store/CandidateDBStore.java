@@ -17,8 +17,8 @@ import org.slf4j.LoggerFactory;
  * Подключение к базе в веб приложении. Хранение кандидатов
  *
  * @author Alex_life
- * @version 2.0
- * @since 18.10.2022
+ * @version 3.0
+ * @since 19.10.2022
  */
 @ThreadSafe
 @Repository
@@ -28,7 +28,7 @@ public class CandidateDBStore {
     private static final String SQL_SELECT_ALL = "SELECT * FROM candidate ORDER BY id";
 
     private static final String SQL_INSERT =
-            "INSERT INTO candidate(name, description, created, city_id) VALUES (?, ?, ?, ?)";
+            "INSERT INTO candidate(name, description, created, city_id, photo) VALUES (?, ?, ?, ?, ?)";
 
     private static final String SQL_UPDATE =
             "UPDATE candidate SET name = ?, description = ?, created = ?, city_id = ? WHERE id = ?";
@@ -61,6 +61,7 @@ public class CandidateDBStore {
             ps.setString(2, candidate.getDescription());
             ps.setTimestamp(3, Timestamp.valueOf(LocalDateTime.now()));
             ps.setInt(4, candidate.getCity().getId());
+            ps.setBytes(5, candidate.getPhoto());
             ps.execute();
             try (ResultSet id = ps.getGeneratedKeys()) {
                 if (id.next()) {
@@ -108,7 +109,8 @@ public class CandidateDBStore {
                 it.getString("name"),
                 it.getString("description"),
                 it.getTimestamp("created").toLocalDateTime(),
-                new City(it.getInt("city_id"), null)
+                new City(it.getInt("city_id"), null),
+                it.getBytes("photo")
         );
     }
 }
