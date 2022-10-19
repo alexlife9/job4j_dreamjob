@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 /**
- * Тестирование базы данных. Liquibase H2
+ * Тестирование базы данных кандидатов. Liquibase H2
  *
  * @author Alex_life
  * @version 1.0
