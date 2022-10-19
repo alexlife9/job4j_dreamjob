@@ -52,8 +52,8 @@ public class UserService {
         storeUser.delete(user);
     }
 
-    public Optional<User> findUserByEmailAndPwd(String email, String password) {
-        return storeUser.findUserByEmailAndPwd(email, password);
+    public Optional<User> findUserByEmailAndPassword(String email, String password) {
+        return storeUser.findUserByEmailAndPassword(email, password);
     }
 
 

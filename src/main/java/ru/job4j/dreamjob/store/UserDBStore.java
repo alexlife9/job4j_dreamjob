@@ -149,7 +149,7 @@ public class UserDBStore {
         );
     }
 
-    public Optional<User> findUserByEmailAndPwd(String email, String password) {
+    public Optional<User> findUserByEmailAndPassword(String email, String password) {
         Optional<User> check = Optional.empty();
         try (Connection cn = pool.getConnection();
              PreparedStatement ps =  cn.prepareStatement(SQL_FIND_NAME_AND_EMAIL)) {
@@ -161,7 +161,7 @@ public class UserDBStore {
                 }
             }
         } catch (Exception e) {
-            LOG.error("UserDBStore. Ошибка в методе findUserByEmailAndPwd - ", e);
+            LOG.error("UserDBStore. Ошибка в методе findUserByEmailAndPassword - ", e);
         }
         return check;
     }
