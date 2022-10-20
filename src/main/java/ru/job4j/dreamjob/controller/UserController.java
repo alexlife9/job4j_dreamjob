@@ -37,8 +37,8 @@ public class UserController {
 
     @PostMapping("/registration")
     public String registration(Model model, @ModelAttribute User user) {
-        Optional<User> regUser = userService.addUser(user);
         user.setCreated(LocalDateTime.now());
+        Optional<User> regUser = userService.addUser(user);
         if (regUser.isEmpty()) {
             model.addAttribute("message", "Пользователь уже существует");
             return "redirect:/fail";
