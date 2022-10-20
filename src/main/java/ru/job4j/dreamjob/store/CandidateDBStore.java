@@ -17,8 +17,8 @@ import org.slf4j.LoggerFactory;
  * Подключение к базе в веб приложении. Хранение кандидатов
  *
  * @author Alex_life
- * @version 3.0
- * @since 19.10.2022
+ * @version 4.0
+ * @since 20.10.2022
  */
 @ThreadSafe
 @Repository
@@ -31,7 +31,7 @@ public class CandidateDBStore {
             "INSERT INTO candidate(name, description, created, city_id, photo) VALUES (?, ?, ?, ?, ?)";
 
     private static final String SQL_UPDATE =
-            "UPDATE candidate SET name = ?, description = ?, created = ?, city_id = ? WHERE id = ?";
+            "UPDATE candidate SET name = ?, description = ?, created = ?, city_id = ?, photo = ? WHERE id = ?";
 
     private static final String SQL_FIND_ID = "SELECT * FROM candidate WHERE id = ?";
 
@@ -80,7 +80,8 @@ public class CandidateDBStore {
             ps.setString(2, candidate.getDescription());
             ps.setTimestamp(3, Timestamp.valueOf(candidate.getCreated()));
             ps.setInt(4, candidate.getCity().getId());
-            ps.setInt(5, candidate.getId());
+            ps.setBytes(5, candidate.getPhoto());
+            ps.setInt(6, candidate.getId());
             ps.execute();
         } catch (Exception e) {
             LOG.error("CandidateDbStore. Ошибка в методе updateCandidate - ", e);

@@ -15,8 +15,8 @@ import java.util.List;
  * Тестирование базы данных кандидатов. Liquibase H2
  *
  * @author Alex_life
- * @version 1.0
- * @since 18.10.2022
+ * @version 2.0
+ * @since 20.10.2022
  */
 class CandidateDBStoreTest {
     private static CandidateDBStore candidateStore;
@@ -29,8 +29,8 @@ class CandidateDBStoreTest {
 
     @Test
     void findAll() {
-        Candidate candidate1 = new Candidate(1, "a", "a", LocalDateTime.now(), new City(1, "a"));
-        Candidate candidate2 = new Candidate(2, "b", "b", LocalDateTime.now(), new City(2, "b"));
+        Candidate candidate1 = new Candidate(1, "a", "a", LocalDateTime.now(), new City(1, "a"), new byte[1]);
+        Candidate candidate2 = new Candidate(2, "b", "b", LocalDateTime.now(), new City(2, "b"), new byte[1]);
         candidateStore.addCandidate(candidate1);
         candidateStore.addCandidate(candidate2);
         List<Candidate> all = candidateStore.findAll();
@@ -39,7 +39,7 @@ class CandidateDBStoreTest {
 
     @Test
     void addPost() {
-        Candidate candidate1 = new Candidate(1, "a", "a", LocalDateTime.now(), new City(1, "a"));
+        Candidate candidate1 = new Candidate(1, "a", "a", LocalDateTime.now(), new City(1, "a"), new byte[1]);
         candidateStore.addCandidate(candidate1);
         Assertions.assertEquals(1, candidateStore.findAll().size());
         Assertions.assertTrue(candidateStore.findAll().contains(candidate1));
