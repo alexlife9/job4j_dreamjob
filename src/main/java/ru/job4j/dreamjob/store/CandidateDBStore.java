@@ -14,7 +14,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * Подключение к базе в веб приложении. Хранение кандидатов
+ * Подключение к базе в веб приложении. Хранение кандидатов.
  *
  * @author Alex_life
  * @version 4.0
