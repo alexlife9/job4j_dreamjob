@@ -8,9 +8,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import ru.job4j.dreamjob.model.Post;
+import ru.job4j.dreamjob.model.UserSession;
 import ru.job4j.dreamjob.service.CityService;
 import ru.job4j.dreamjob.service.PostService;
 
+import javax.servlet.http.HttpSession;
 import java.time.LocalDateTime;
 
 /**
@@ -21,8 +23,8 @@ import java.time.LocalDateTime;
  * Thymeleaf генерирует HTML и возвращает ее клиенту.
  *
  * @author Alex_life
- * @version 7.0
- * @since 18.10.2022
+ * @version 8.0
+ * @since 21.10.2022
  */
 @ThreadSafe
 @Controller
@@ -36,13 +38,15 @@ public class PostController {
     }
 
     @GetMapping("/posts")
-    public String posts(Model model) {
+    public String posts(Model model, HttpSession session) {
+        model.addAttribute("user", UserSession.getUser(session));
         model.addAttribute("posts", postService.findAll());
         return "posts";
     }
 
     @GetMapping("/formAddPost")
-    public String addPost(Model model) {
+    public String addPost(Model model, HttpSession session) {
+        model.addAttribute("user", UserSession.getUser(session));
         model.addAttribute("posts", new Post());
         model.addAttribute("cities", cityService.getAllCities());
         return "addPost";

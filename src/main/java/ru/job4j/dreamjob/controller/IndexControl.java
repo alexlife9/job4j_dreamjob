@@ -2,7 +2,12 @@ package ru.job4j.dreamjob.controller;
 
 import net.jcip.annotations.ThreadSafe;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import ru.job4j.dreamjob.model.User;
+import ru.job4j.dreamjob.model.UserSession;
+
+import javax.servlet.http.HttpSession;
 
 /**
  * Главная страница
@@ -19,18 +24,17 @@ import org.springframework.web.bind.annotation.GetMapping;
  * Браузер отправляет запрос на сервер. Сервер ищет нужный контроллер, который в свою очередь берет файл index.html
  * и возвращает его содержимое клиенту.
  *
- * Файл index.html находится по пути: src/main/resources/templates/index.html
- *
  * @author Alex_life
- * @version 4.0
- * @since 09.10.2022
+ * @version 5.0
+ * @since 21.10.2022
  */
 @ThreadSafe
 @Controller
 public class IndexControl {
 
     @GetMapping("/index")
-    public String index() {
+    public String index(Model model, HttpSession session) {
+        model.addAttribute("user", UserSession.getUser(session));
         return "index";
     }
 }
