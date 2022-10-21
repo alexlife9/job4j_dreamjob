@@ -43,9 +43,10 @@
     <div class="row">
         <div class="card" style="width: 100%">
             <div class="card-header">
-                Пользователь уже существует!!! не знаю как сюда вывести мессадж из юзерСервиса, чтобы убрать дубли сообщений.
+                <div th:if="${message}" class="alert alert-danger" role="alert">
+                    Пользователь уже существует!
+                </div>
                 <a class="nav-item nav-link" th:href="@{/formAddUser}">Попробовать снова</a>
-
             </div>
         </div>
     </div>
