@@ -32,8 +32,8 @@ public class UserDBStore {
     private static final String SQL_FIND_ID = "SELECT * FROM users WHERE id = ?";
     private static final String SQL_FIND_NAME = "SELECT * FROM users WHERE name = ?";
     private static final String SQL_FIND_EMAIL = "SELECT * FROM users WHERE email = ?";
-    private static final String SQL_FIND_NAME_AND_EMAIL =
-            "SELECT * FROM users WHERE users.email LIKE ? AND users.password LIKE ?;";
+    private static final String SQL_FIND_EMAIL_AND_PASSWORD =
+            "SELECT * FROM users WHERE email = ? AND password = ?";
 
     public UserDBStore(BasicDataSource pool) {
         this.pool = pool;
@@ -152,7 +152,7 @@ public class UserDBStore {
     public Optional<User> findUserByEmailAndPassword(String email, String password) {
         Optional<User> check = Optional.empty();
         try (Connection cn = pool.getConnection();
-             PreparedStatement ps =  cn.prepareStatement(SQL_FIND_NAME_AND_EMAIL)) {
+             PreparedStatement ps =  cn.prepareStatement(SQL_FIND_EMAIL_AND_PASSWORD)) {
             ps.setString(1, email);
             ps.setString(2, password);
             try (ResultSet it = ps.executeQuery()) {

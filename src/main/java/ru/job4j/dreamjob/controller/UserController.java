@@ -8,13 +8,15 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import ru.job4j.dreamjob.model.User;
-import ru.job4j.dreamjob.model.UserSession;
+import ru.job4j.dreamjob.util.UserSession;
 import ru.job4j.dreamjob.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.time.LocalDateTime;
 import java.util.Optional;
+
+import static ru.job4j.dreamjob.util.UserSession.getUser;
 
 /**
  * Контроллер для регистрации пользователей
@@ -33,8 +35,8 @@ public class UserController {
     }
 
     @GetMapping("/formAddUser")
-    public String formAddUser(Model model, HttpSession session) {
-        model.addAttribute("user", UserSession.getUser(session));
+    public String formAddUser(Model model, @RequestParam(name = "fail", required = false) Boolean fail, HttpSession session) {
+        model.addAttribute("user", getUser(session));
         model.addAttribute("user", new User());
         return "addUser";
     }
@@ -42,7 +44,7 @@ public class UserController {
     @PostMapping("/registration")
     public String registration(Model model, @ModelAttribute User user, HttpSession session) {
         user.setCreated(LocalDateTime.now());
-        model.addAttribute("user", UserSession.getUser(session));
+        model.addAttribute("user", getUser(session));
         Optional<User> regUser = userService.addUser(user);
         if (regUser.isEmpty()) {
             return "redirect:/fail";
@@ -63,7 +65,8 @@ public class UserController {
     }
 
     @GetMapping("/loginPage")
-    public String loginPage(Model model, @RequestParam(name = "fail", required = false) Boolean fail) {
+    public String loginPage(Model model, @RequestParam(name = "fail", required = false) Boolean fail, HttpSession session) {
+        model.addAttribute("user", getUser(session));
         model.addAttribute("fail", fail != null);
         return "login";
     }
