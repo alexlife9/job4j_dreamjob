@@ -5,6 +5,7 @@ import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Set;
 
 import static java.util.Objects.isNull;
 
@@ -17,8 +18,25 @@ import static java.util.Objects.isNull;
  */
 @Component
 public class AuthFilter implements Filter {
+    private static final String PAGES_FILTER =
+            String.format("%S%S%S%S%S%S%S%S",
+                    "loginPage", "formAddUser", "index",
+                    "login", "registration",
+                    "addUser", "success", "fail");
     private static final String USER = "user";
     private static final String LOGIN_PAGE = "/loginPage";
+    private final Set<String> pages = Set.of(PAGES_FILTER);
+
+    private boolean containPages(String url) {
+        boolean rsl = false;
+        for (String page : pages) {
+            if (url.endsWith(page)) {
+                rsl = true;
+                break;
+            }
+        }
+        return rsl;
+    }
 
     @Override
     public void doFilter(
@@ -28,7 +46,7 @@ public class AuthFilter implements Filter {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse res = (HttpServletResponse) response;
         String uri = req.getRequestURI();
-        if (uri.endsWith(LOGIN_PAGE)) {
+        if (containPages(uri)) {
             chain.doFilter(req, res);
             return;
         }
