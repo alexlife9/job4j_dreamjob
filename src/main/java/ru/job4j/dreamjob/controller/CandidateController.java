@@ -12,7 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import ru.job4j.dreamjob.model.Candidate;
-import ru.job4j.dreamjob.util.UserSession;
+import ru.job4j.dreamjob.model.User;
 import ru.job4j.dreamjob.service.CandidateService;
 import ru.job4j.dreamjob.service.CityService;
 
@@ -20,12 +20,14 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.time.LocalDateTime;
 
+import static ru.job4j.dreamjob.util.UserSession.getUser;
+
 /**
  * Контроллер для кандидатов
  *
  * @author Alex_life
- * @version 8.0
- * @since 21.10.2022
+ * @version 9.0
+ * @since 24.10.2022
  */
 @ThreadSafe
 @Controller
@@ -38,16 +40,19 @@ public class CandidateController {
         this.cityService = cityService;
     }
 
+    @ModelAttribute("user")
+    public User getUserSession(HttpSession session) {
+        return getUser(session);
+    }
+
     @GetMapping("/candidates")
-    public String candidates(Model model, HttpSession session) {
-        model.addAttribute("user", UserSession.getUser(session));
+    public String candidates(Model model) {
         model.addAttribute("candidates", candidateService.findAll());
         return "candidates";
     }
 
     @GetMapping("/formAddCandidate")
-    public String addCandidate(Model model, HttpSession session) {
-        model.addAttribute("user", UserSession.getUser(session));
+    public String addCandidate(Model model) {
         model.addAttribute("candidates", new Candidate());
         model.addAttribute("cities", cityService.getAllCities());
         return "addCandidate";

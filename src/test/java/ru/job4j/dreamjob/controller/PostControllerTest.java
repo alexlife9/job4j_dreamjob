@@ -14,7 +14,6 @@ import ru.job4j.dreamjob.model.User;
 import ru.job4j.dreamjob.service.CityService;
 import ru.job4j.dreamjob.service.PostService;
 
-import javax.servlet.http.HttpSession;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
@@ -28,15 +27,13 @@ import static org.mockito.Mockito.when;
  * Тестирование с помощью Mockito
  *
  * @author Alex_life
- * @version 2.0
+ * @version 3.0
  * @since 24.10.2022
  */
 @ExtendWith(MockitoExtension.class)
 public class PostControllerTest {
     @Mock
     private PostService postService;
-    @Mock
-    private HttpSession httpSession;
     @Mock
     private CityService cityService;
     @Mock
@@ -58,10 +55,8 @@ public class PostControllerTest {
     public void posts() {
         user.setName("Гость");
         List<Post> input = Arrays.asList(post1, post2);
-        when(httpSession.getAttribute("user")).thenReturn(null);
         when(postService.findAll()).thenReturn(input);
-        String page = postController.posts(model, httpSession);
-        verify(model).addAttribute("user", user);
+        String page = postController.posts(model);
         verify(model).addAttribute("posts", input);
         assertThat(page, is("posts"));
     }
@@ -70,11 +65,9 @@ public class PostControllerTest {
     public void addPost() {
         user.setName("Гость");
         List<City> cities = Arrays.asList(city1, city2);
-        when(httpSession.getAttribute("user")).thenReturn(null);
         when(postService.findByIdPost(999)).thenReturn(post1);
         when(cityService.getAllCities()).thenReturn(cities);
-        String page = postController.addPost(model, httpSession);
-        verify(model).addAttribute("user", user);
+        String page = postController.addPost(model);
         verify(model).addAttribute("posts", new Post());
         verify(model).addAttribute("cities", cities);
         assertThat(page, is("addPost"));

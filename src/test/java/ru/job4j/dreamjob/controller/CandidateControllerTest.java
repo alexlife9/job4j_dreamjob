@@ -17,7 +17,6 @@ import ru.job4j.dreamjob.model.User;
 import ru.job4j.dreamjob.service.CandidateService;
 import ru.job4j.dreamjob.service.CityService;
 
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.Arrays;
@@ -30,16 +29,14 @@ import static org.mockito.Mockito.verify;
 
 /**
  * @author Alex_life
- * @version 1.0
- * @since 23.10.2022
+ * @version 2.0
+ * @since 24.10.2022
  */
 @ExtendWith(MockitoExtension.class)
 @MockitoSettings(strictness = Strictness.LENIENT)
-class CandidateControllerTest {
+public class CandidateControllerTest {
     @Mock
     private CandidateService candidateService;
-    @Mock
-    private HttpSession httpSession;
     @Mock
     private CityService cityService;
     @Mock
@@ -63,10 +60,8 @@ class CandidateControllerTest {
     void candidates() {
         user.setName("Гость");
         List<Candidate> input = Arrays.asList(candidate1, candidate2);
-        when(httpSession.getAttribute("user")).thenReturn(null);
         when(candidateService.findAll()).thenReturn(input);
-        String page = candidateController.candidates(model, httpSession);
-        verify(model).addAttribute("user", user);
+        String page = candidateController.candidates(model);
         verify(model).addAttribute("candidates", input);
         assertThat(page, is("candidates"));
     }
@@ -75,11 +70,9 @@ class CandidateControllerTest {
     void addCandidate() {
         user.setName("Гость");
         List<City> cities = Arrays.asList(city1, city2);
-        when(httpSession.getAttribute("user")).thenReturn(null);
         when(candidateService.findByIdCandidate(8)).thenReturn(candidate1);
         when(cityService.getAllCities()).thenReturn(cities);
-        String page = candidateController.addCandidate(model, httpSession);
-        verify(model).addAttribute("user", user);
+        String page = candidateController.addCandidate(model);
         verify(model).addAttribute("candidates", new Candidate());
         verify(model).addAttribute("cities", cities);
         assertThat(page, is("addCandidate"));
