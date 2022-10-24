@@ -14,22 +14,20 @@ import static java.util.Objects.isNull;
  * Проверка доступа с помощью фильтра
  *
  * @author Alex_life
- * @version 2.0
- * @since 23.10.2022
+ * @version 3.0
+ * @since 24.10.2022
  */
 @Component
 public class AuthFilter implements Filter {
-    private static final String PAGES_FILTER =
-            String.format("%S%S%S%S%S%S%S", "index",
-                    "loginPage", "formAddUser",
-                    "login", "registration",
-                    "success", "fail");
     private static final String USER = "user";
     private static final String LOGIN_PAGE = "/loginPage";
-    private static final Set<String> PAGES = Set.of(PAGES_FILTER);
+    private static final Set<String> PAGES = Set.of("index",
+            "loginPage", "formAddUser",
+            "login", "registration",
+            "success", "fail");
 
     private boolean containPages(String uri) {
-        return PAGES.stream().allMatch(uri::endsWith);
+        return PAGES.stream().anyMatch(uri::endsWith);
     }
 
     @Override
@@ -43,8 +41,8 @@ public class AuthFilter implements Filter {
             chain.doFilter(req, res);
             return;
         }
-        if (req.getSession().getAttribute("user") == null) {
-            res.sendRedirect(req.getContextPath() + "/loginPage");
+        if (isNull(req.getSession().getAttribute(USER))) {
+            res.sendRedirect(req.getContextPath() + LOGIN_PAGE);
             return;
         }
         chain.doFilter(req, res);
