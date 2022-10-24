@@ -34,20 +34,20 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 public class PostControllerTest {
     @Mock
-    PostService postService;
+    private PostService postService;
     @Mock
-    HttpSession httpSession;
+    private HttpSession httpSession;
     @Mock
-    CityService cityService;
+    private CityService cityService;
     @Mock
-    Model model;
+    private Model model;
     @InjectMocks
     private PostController postController;
-    City city1 = new City(1, "a");
-    City city2 = new City(2, "b");
-    Post post1 = new Post(1, "a post", "a", LocalDateTime.now(), city1);
-    Post post2 = new Post(2, "b post", "b", LocalDateTime.now(), city2);
-    User user = new User();
+    private final City city1 = new City(1, "a");
+    private final City city2 = new City(2, "b");
+    private final Post post1 = new Post(1, "a post", "a", LocalDateTime.now(), city1);
+    private final Post post2 = new Post(2, "b post", "b", LocalDateTime.now(), city2);
+    private final User user = new User();
 
     @Before
     public void initMocks(){

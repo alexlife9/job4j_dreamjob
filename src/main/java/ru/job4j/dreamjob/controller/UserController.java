@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import ru.job4j.dreamjob.model.User;
-import ru.job4j.dreamjob.util.UserSession;
 import ru.job4j.dreamjob.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -35,7 +34,7 @@ public class UserController {
     }
 
     @GetMapping("/formAddUser")
-    public String formAddUser(Model model, @RequestParam(name = "fail", required = false) Boolean fail, HttpSession session) {
+    public String formAddUser(Model model, HttpSession session) {
         model.addAttribute("user", getUser(session));
         model.addAttribute("user", new User());
         return "addUser";
@@ -65,7 +64,8 @@ public class UserController {
     }
 
     @GetMapping("/loginPage")
-    public String loginPage(Model model, @RequestParam(name = "fail", required = false) Boolean fail, HttpSession session) {
+    public String loginPage(Model model, @RequestParam(name = "fail", required = false) Boolean fail,
+                            HttpSession session) {
         model.addAttribute("user", getUser(session));
         model.addAttribute("fail", fail != null);
         return "login";

@@ -20,22 +20,22 @@ import static java.util.Objects.isNull;
 @Component
 public class AuthFilter implements Filter {
     private static final String PAGES_FILTER =
-            String.format("%S%S%S%S",
+            String.format("%S%S%S%S%S%S%S", "index",
                     "loginPage", "formAddUser",
-                    "login", "registration");
+                    "login", "registration",
+                    "success", "fail");
     private static final String USER = "user";
     private static final String LOGIN_PAGE = "/loginPage";
-    private final Set<String> pages = Set.of(PAGES_FILTER);
+    private static final Set<String> PAGES = Set.of(PAGES_FILTER);
 
     private boolean containPages(String uri) {
-        return pages.stream().allMatch(uri::endsWith);
+        return PAGES.stream().allMatch(uri::endsWith);
     }
 
     @Override
-    public void doFilter(
-            ServletRequest request,
-            ServletResponse response,
-            FilterChain chain) throws IOException, ServletException {
+    public void doFilter(ServletRequest request,
+                         ServletResponse response,
+                         FilterChain chain) throws IOException, ServletException {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse res = (HttpServletResponse) response;
         String uri = req.getRequestURI();
@@ -43,8 +43,8 @@ public class AuthFilter implements Filter {
             chain.doFilter(req, res);
             return;
         }
-        if (isNull(req.getSession().getAttribute(USER))) {
-            res.sendRedirect(req.getContextPath() + LOGIN_PAGE);
+        if (req.getSession().getAttribute("user") == null) {
+            res.sendRedirect(req.getContextPath() + "/loginPage");
             return;
         }
         chain.doFilter(req, res);

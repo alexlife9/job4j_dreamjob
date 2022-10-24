@@ -38,7 +38,6 @@ public class CandidateController {
         this.cityService = cityService;
     }
 
-
     @GetMapping("/candidates")
     public String candidates(Model model, HttpSession session) {
         model.addAttribute("user", UserSession.getUser(session));
@@ -49,8 +48,7 @@ public class CandidateController {
     @GetMapping("/formAddCandidate")
     public String addCandidate(Model model, HttpSession session) {
         model.addAttribute("user", UserSession.getUser(session));
-        model.addAttribute("candidates",
-                new Candidate(0, "Заполните поле", "Заполните поле", LocalDateTime.now(), null));
+        model.addAttribute("candidates", new Candidate());
         model.addAttribute("cities", cityService.getAllCities());
         return "addCandidate";
     }
