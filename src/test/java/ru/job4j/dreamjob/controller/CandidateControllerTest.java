@@ -9,6 +9,8 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.junit.jupiter.MockitoSettings;
 import org.mockito.quality.Strictness;
+import org.springframework.http.MediaType;
+import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 import ru.job4j.dreamjob.model.Candidate;
@@ -29,8 +31,8 @@ import static org.mockito.Mockito.verify;
 
 /**
  * @author Alex_life
- * @version 2.0
- * @since 24.10.2022
+ * @version 3.0
+ * @since 27.10.2022
  */
 @ExtendWith(MockitoExtension.class)
 @MockitoSettings(strictness = Strictness.LENIENT)
@@ -42,13 +44,13 @@ public class CandidateControllerTest {
     @Mock
     private Model model;
     @Mock
-    private MultipartFile file;
+    private MultipartFile file = new MockMultipartFile("file", "hello.txt", MediaType.TEXT_PLAIN_VALUE, "hw".getBytes());
     @InjectMocks
     private CandidateController candidateController;
     private final City city1 = new City(1, "a");
     private final City city2 = new City(2, "b");
-    private final Candidate candidate1 = new Candidate(1, "a candidate", "a", LocalDateTime.now(), city1,null);
-    private final Candidate candidate2 = new Candidate(2, "b candidate", "b", LocalDateTime.now(), city2, null);
+    private final Candidate candidate1 = new Candidate(1, "a candidate", "a", LocalDateTime.now(), city1, new byte[0]);
+    private final Candidate candidate2 = new Candidate(2, "b candidate", "b", LocalDateTime.now(), city2, new byte[0]);
     private final User user = new User();
 
     @Before
@@ -104,9 +106,5 @@ public class CandidateControllerTest {
         String page = candidateController.updateCandidate(candidate1, file);
         verify(candidateService).updateCandidate(candidate1);
         assertThat(page, is("redirect:/candidates"));
-    }
-
-    @Test
-    void download() {
     }
 }
